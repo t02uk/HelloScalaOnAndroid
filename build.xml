@@ -32,6 +32,8 @@
     <!-- Specify the Android target -->
     <property file="${basedir}/default.properties" />
 
+    <property file="${basedir}/build.properties" />
+	
     <!-- ******************************************************* -->
     <!-- **************** Overridable Properties *************** -->
     <!-- ******************************************************* -->
@@ -160,7 +162,7 @@
     <!-- Intermediate files -->
     <property name="dex.file.name" value="classes.dex" />
     <property name="intermediate.dex.file" location="${out.absolute.dir}/${dex.file.name}" />
-    <property name="resource.package.file.name" value="${ant.project.name}.ap_" />
+    <property name="resource.package.file.name" value="${ant.project.name}-release.apk" />
 
     <!-- Build property file -->
     <property name="out.build.prop.file" location="${out.absolute.dir}/build.prop" />
@@ -701,7 +703,8 @@
         <taskdef resource="proguard/ant/task.properties"
                  classpath="tools/proguard.jar" />
         <proguard>
-            -injars ${out.classes.absolute.dir}:tools/scala-library.jar(!META-INF/MANIFEST.MF,!library.properties)
+            -injars ${out.classes.absolute.dir}(!META-INF/MANIFEST.MF,!library.properties)
+        	-injars tools/scala-library.jar
             -outjars "${out.absolute.dir}/classes.min.jar"
             -libraryjars "${android.jar}"
             -dontwarn

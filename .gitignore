@@ -1,0 +1,5 @@
+.cache
+*.d
+bin/*
+gen/*
+build.properties
